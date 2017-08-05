@@ -29,6 +29,10 @@ func Run(title string, root Scene) error {
 	}
 	defer renderer.Destroy()
 
+	if err := root.Initialize(); err != nil {
+		return err
+	}
+
 	loop(root, renderer)
 
 	return nil
