@@ -2,13 +2,19 @@ package main
 
 import (
 	"log"
+	_ "net/http/pprof"
 
 	"github.com/oracle02k/go_sandbox/game"
 	"github.com/oracle02k/go_sandbox/game/scene"
 )
 
 func main() {
-	if err := game.Run("sandbox", &scene.Text{}); err != nil {
+	/*
+		go func() {
+			log.Println(http.ListenAndServe("localhost:6060", nil))
+		}()
+	*/
+	if err := game.Run("sandbox", scene.NewSceneDeviceInfo()); err != nil {
 		log.Fatal(err)
 	}
 }
