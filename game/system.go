@@ -1,6 +1,7 @@
 package game
 
 import (
+	"github.com/veandco/go-sdl2/img"
 	"github.com/veandco/go-sdl2/sdl"
 	"github.com/veandco/go-sdl2/ttf"
 )
@@ -12,8 +13,13 @@ func Run(title string, root Scene) error {
 	}
 	defer sdl.Quit()
 
+	if img.Init(img.INIT_PNG) != img.INIT_PNG {
+		panic(img.GetError())
+	}
+	defer img.Quit()
+
 	if ttf.Init() != nil {
-		panic(sdl.GetError())
+		panic(ttf.GetError())
 	}
 	defer ttf.Quit()
 
