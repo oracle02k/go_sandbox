@@ -14,7 +14,7 @@ func main() {
 			log.Println(http.ListenAndServe("localhost:6060", nil))
 		}()
 	*/
-	if err := game.Run("sandbox", scene.NewSceneTexture()); err != nil {
+	if err := game.Run("sandbox", scene.NewSceneDeviceInfo()); err != nil {
 		log.Fatal(err)
 	}
 }

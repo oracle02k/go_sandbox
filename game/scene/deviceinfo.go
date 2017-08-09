@@ -33,10 +33,9 @@ func (s *sceneDeviceInfo) Progress() {
 }
 
 // Draw シーン描画
-func (s *sceneDeviceInfo) Draw(renderer *sdl.Renderer) {
-
+func (s *sceneDeviceInfo) Draw() {
 	info := sdl.RendererInfo{}
-	renderer.GetRendererInfo(&info)
+	game.Renderer().GetRendererInfo(&info)
 
 	names := map[int32]string{
 		sdl.PIXELFORMAT_UNKNOWN:     "PIXELFORMAT_UNKNOWN",
@@ -78,18 +77,18 @@ func (s *sceneDeviceInfo) Draw(renderer *sdl.Renderer) {
 	}
 
 	color := sdl.Color{R: 255, G: 255, B: 255, A: 255}
-	s.font.Draw(renderer, fmt.Sprintf("device name: %v", info.Name), 10, 10, color)
-	s.font.Draw(renderer, fmt.Sprintf("flags: %v", info.Flags), 10, 22, color)
-	s.font.Draw(renderer, fmt.Sprintf("max texture width: %v", info.MaxTextureWidth), 10, 32, color)
-	s.font.Draw(renderer, fmt.Sprintf("max texture height: %v", info.MaxTextureHeight), 10, 42, color)
-	s.font.Draw(renderer, fmt.Sprintf("num texture formats: %v", info.NumTextureFormats), 10, 52, color)
+	s.font.Draw(fmt.Sprintf("device name: %v", info.Name), 10, 10, color)
+	s.font.Draw(fmt.Sprintf("flags: %v", info.Flags), 10, 22, color)
+	s.font.Draw(fmt.Sprintf("max texture width: %v", info.MaxTextureWidth), 10, 32, color)
+	s.font.Draw(fmt.Sprintf("max texture height: %v", info.MaxTextureHeight), 10, 42, color)
+	s.font.Draw(fmt.Sprintf("num texture formats: %v", info.NumTextureFormats), 10, 52, color)
 
 	for i := 0; i < len(info.TextureFormats); i++ {
 		if info.TextureFormats[i] != 0 {
 			y := int32(62 + i*10)
 			value := info.TextureFormats[i]
 			name := names[value]
-			s.font.Draw(renderer, fmt.Sprintf("texture format: %v(%v)", name, value), 10, y, color)
+			s.font.Draw(fmt.Sprintf("texture format: %v(%v)", name, value), 10, y, color)
 		}
 	}
 }

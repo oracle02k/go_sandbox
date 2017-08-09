@@ -1,6 +1,7 @@
 package font
 
 import (
+	"github.com/oracle02k/go_sandbox/game"
 	"github.com/veandco/go-sdl2/sdl"
 	"github.com/veandco/go-sdl2/ttf"
 )
@@ -28,13 +29,14 @@ func (d *DynamicFont) Close() {
 }
 
 // Draw DynamicFontを使用して対象のRendererに文字テクスチャを描画する.表示毎にテクスチャ生成〜転送を行うため動作が重い
-func (d *DynamicFont) Draw(renderer *sdl.Renderer, text string, x int32, y int32, color sdl.Color) error {
+func (d *DynamicFont) Draw(text string, x int32, y int32, color sdl.Color) error {
 	surface, err := d.font.RenderUTF8_Blended(text, color)
 	if err != nil {
 		return err
 	}
 	defer surface.Free()
 
+	renderer := game.Renderer()
 	texture, err := renderer.CreateTextureFromSurface(surface)
 	if err != nil {
 		return err

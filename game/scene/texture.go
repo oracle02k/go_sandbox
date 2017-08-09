@@ -3,7 +3,6 @@ package scene
 import (
 	"github.com/oracle02k/go_sandbox/game"
 	"github.com/oracle02k/go_sandbox/game/display"
-	"github.com/veandco/go-sdl2/sdl"
 )
 
 type sceneTexture struct {
@@ -28,6 +27,6 @@ func (s *sceneTexture) Progress() {
 }
 
 // Renderer シーン初期化
-func (s *sceneTexture) Draw(renderer *sdl.Renderer) {
-	s.texture.Draw(renderer, 10, 10)
+func (s *sceneTexture) Draw() {
+	s.texture.Draw(10, 10)
 }
